@@ -1,6 +1,8 @@
 const levelSelection = document.getElementById("level-selection");
 const playGame = document.getElementById("play-game");
 const boardContainer = document.getElementById("board-container");
+let bombs = [];
+
 
 //1. recuperare il livello scelto dall'utente al click del play
 //2. creazione di una funzione che indica il numero di celle in base ad un livello
@@ -15,6 +17,9 @@ playGame.addEventListener("click", function () {
     let totalBoxes = levelToBox(level);
 
     boxCreation(totalBoxes);
+
+    //10
+   bombs = bombsGenerator(totalBoxes);
 
 })
 
@@ -48,14 +53,20 @@ function boxCreation(totalBoxes) {
 
     for (let index = 0; index < totalBoxes; index++) {
 
-        let newBox = document.createElement("div");
+       let newBox = document.createElement("div");
         newBox.classList.add("box");
         newBox.classList.add("box-level-" + numberOfCols);
         newBox.innerText = index + 1;
         //6
         newBox.addEventListener("click", function () {
-            this.classList.toggle("active");
+            const boxNumber = parseInt(this.textContent);
 
+            if (bombs.includes(boxNumber)) {
+                this.classList.add("bomb");
+                alert("you lose!");
+            } else {
+                this.classList.toggle("active");
+            }
         })
         boardContainer.append(newBox);
     }
@@ -65,7 +76,8 @@ function boxCreation(totalBoxes) {
 //7. creazione di una funzione che genera numeri random da 1 al numero massimo di celle in base al livello scelto dall'utente (total boxes)
 //8. creazione di un array che dovrà contenere i 16 numeri random (totale bombe)
 //9. ciclare la funzione randomNumberGenerator fino a che il totale degli elementi dell'array non sia uguale al totale bombe
-//  9.A se un numero random creato è uguale ad un mumero già presente nell'array non viene pushato.
+//  9.A se un numero random creato è uguale ad un numero già presente nell'array non viene pushato.
+//10. dare alla funzione il parametro del massimo valore dei numeri del mio array che dipende dal livello scelto
 
 
 //7
@@ -75,19 +87,20 @@ function randomNumberGenerator(numMin, numMax) {
 }
 
 
-function bombsGenerator() {
+
+function bombsGenerator(maxBombs) {
     //8
     let bombNumbersSet = [];
     let bombsTotal = 16;
 
     //9
     while (bombNumbersSet.length < bombsTotal) {
-        let newBomb = randomNumberGenerator(1, totalBoxes);
+        let newBomb = randomNumberGenerator(1, maxBombs);
+        let alreadyIn = bombNumbersSet.includes(newBomb);
+        //9.A
+        if (alreadyIn === false) {
+            bombNumbersSet.push(newBomb);
+        }
     }
-    //9.A
-    let alreadyIn = bombNumbersSet.includes(newBomb);
-
-    if (alreadyIn === false) {
-        bombNumbersSet.push(newBomb);
-    }
+  return bombNumbersSet;
 }

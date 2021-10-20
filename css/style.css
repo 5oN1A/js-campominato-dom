@@ -24,7 +24,7 @@ main {
   border: 1px solid blue;
   width: 10%;
   height: 10%;
-  background-color: plum;
+  background-color: ivory;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,8 +46,11 @@ main {
 }
 
 .active {
-    background-color: salmon;
+    background-color: lightseagreen;
 }
 
+.bomb {
+    background-color: red;
+}
 
 
