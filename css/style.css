@@ -1,0 +1,53 @@
+.shell {
+    width: 80%;
+    margin: auto;
+}
+
+main {
+    width: 100%;
+    background-color: aquamarine;
+    min-height: 800px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+#board-container {
+    width: 900px;
+    height: 900px;
+    margin: 0 auto;
+    border: 3px solid purple;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.box {
+  border: 1px solid blue;
+  width: 10%;
+  height: 10%;
+  background-color: plum;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: blue;
+}
+
+.box-level-10 {
+    width: calc(100% / 10);
+    height: calc(100% / 10);;
+}
+.box-level-9 {
+    width: calc(100% / 9);
+    height: calc(100% / 9);
+}
+
+.box-level-7 {
+    width: calc(100% / 7);
+    height: calc(100% / 7);
+}
+
+.active {
+    background-color: salmon;
+}
+
+
+
